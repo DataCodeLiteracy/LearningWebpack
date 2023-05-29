@@ -6,7 +6,7 @@ const app = express();
 
 app.use(morgan("dev"));
 
-// app.use(express.static(path.join(__dirname, "../dist")));
+app.use(express.static(path.join(__dirname, "../dist")));
 
 const port = process.env.PORT || 8081;
 const keywords = [
@@ -53,11 +53,11 @@ app.post("/api/history", (req, res) => {
   keyword = (req.query.keyword || "").trim();
   if (!keyword) return;
 
-  history.filter(item => item.keyword !== keyword);
+  history.filter((item) => item.keyword !== keyword);
 
   history = [
     { keyword, date: "12.31" },
-    ...history.filter(item => item.keyword !== keyword)
+    ...history.filter((item) => item.keyword !== keyword)
   ];
 
   res.json(history);
@@ -66,7 +66,7 @@ app.post("/api/history", (req, res) => {
 app.delete("/api/history", (req, res) => {
   const keyword = (req.query.keyword || "").trim();
 
-  history = history.filter(item => item.keyword !== keyword);
+  history = history.filter((item) => item.keyword !== keyword);
   res.json(history);
 });
 
